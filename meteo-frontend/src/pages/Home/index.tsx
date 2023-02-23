@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import './style.css';
-import ReportsList from "./components/ReportsList/ReportsList";
+import ReportsList from "./ReportsList/ReportsList";
 import axios from "axios";
 import { WeatherReport } from "../../data/model";
-import NewEditReportModal from "./components/NewEditReportModal";
+import NewEditReportModal from "../../components/NewEditReportModal";
+import Button from "@mui/material/Button"
+import Container from "@mui/material/Container";
+import AddIcon from "@mui/icons-material/Add";
+import Modal from "@mui/material/Modal";
 
 
 const Home = () => {
@@ -11,9 +15,13 @@ const Home = () => {
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
     const [editedReport, setEditedReport] = useState<WeatherReport | null>(null)
 
-    const handleCreateNewReport = () => {
+    const handleShowEditModal = () => {
         setIsModalActive(true)
     }
+    const handleHideEditModal = () => {
+        setIsModalActive(false)
+    }
+
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/reports")
@@ -24,20 +32,27 @@ const Home = () => {
     }, [])
 
     return (
-        <div
-            className="reports"
-        >
-            <button className="add-btn" onClick={handleCreateNewReport}>
-                <img src="/icons/add.png" alt="add" />
-                Create New
-            </button>
-            <ReportsList data={ data }/>
-            {isModalActive && <NewEditReportModal
-                report={editedReport}
-                newReportsHandler={(data) => setData(data)}
-                closeModalHandler={() => setIsModalActive(false)}
-            />}
-        </div>
+        <>
+            <Container
+                className="reports"
+            >
+                <Button variant="contained" className="add-btn" onClick={handleShowEditModal}>
+                    <AddIcon />
+                    Create New
+                </Button>
+                <ReportsList data={ data }/>
+            </Container>
+            <Modal
+                open={isModalActive}
+                onClose={handleHideEditModal}
+            >
+                <NewEditReportModal
+                    report={editedReport}
+                    newReportsHandler={(data) => setData(data)}
+                    closeModalHandler={() => setIsModalActive(false)}
+                />
+            </Modal>
+        </>
     )
 }
 

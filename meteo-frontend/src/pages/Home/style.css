@@ -1,22 +1,8 @@
 .reports {
-    display: flex;
-    flex-direction: column;
 }
 .add-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 50px;
-    padding: .5em 1em;
-    margin: 1em;
-    border: 2px solid #2a2a2a;
-    font-size: 1.2em;
-    background: #ffffff;
-}
-.add-btn:hover {
-    cursor: pointer;
-    background: #f3f3f3;
-    transform: scale(95%);
+    width: 200px;
 }
 
 .add-btn img {

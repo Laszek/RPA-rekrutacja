@@ -1,0 +1,23 @@
+
+.form {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    gap: 10px;
+}
+
+.form fieldset {
+    display: flex;
+    justify-content: space-between;
+    padding: .3em .5em;
+}
+
+.btn {
+    padding: .4em;
+    margin: 5px;
+}
+
+.btn.cancel {
+    margin-top: 10px
+}
